@@ -58,6 +58,6 @@ Lehetőségünk van a kedvenc fejezeteinknek a lementésére egy lokális adatb�
 
 <img src="./assets/bible_select@1x.png" width="200">
 <img src="./assets/book_select@1x.png" width="200">
-<img src="./assets/chapter_reading@1x.png" width="200">
 <img src="./assets/chapter_select@1x.png" width="200">
+<img src="./assets/chapter_reading@1x.png" width="200">
 <img src="./assets/saved@1x.png" width="200">
