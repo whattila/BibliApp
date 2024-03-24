@@ -52,7 +52,7 @@ Lehetőségünk van a kedvenc fejezeteinknek a lementésére egy lokális adatb�
 
 ### Use case diagram
 
-<img src="./assets/Main.png" width="400">
+<img src="./assets/Main.png" width="600">
 
 ## Képernyőtervek
 
