@@ -1,3 +1,13 @@
+# Architektúra
+
+Az alkalmazás architektúrája az MVVM mintát követi, mivel ez manapság az általános az adatvezérelt alkalmazásoknál.<br>
+A View-k és ViewModelek feature-ök szerint vannak csoportosítva.<br>
+A több réteg által használt data classok a domain mappában találhatók.<br>
+A data/repositories mappában találhatók a repositoryk, mivel ezeket több nézet is használja (a data mappában lesznek még az adatbázissal és hálózaton kommunikáló osztályok, database és network mappákban).<br>
+
+<img src="./assets/commits.PNG" width="200">
+<img src="./assets/build.PNG" width="200">
+
 # Házi feladat specifikáció
 
 Információk [itt](https://viaumb02.github.io/laborok/android/A01/)
