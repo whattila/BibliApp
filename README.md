@@ -1,16 +1,26 @@
 # Hálózati réteg és adatbázis
 ## Hálózati réteg osztályai
-### BibleApiClient: létrehoz egy implementált példányt a BibleApiService interfészből a RetrofitClient segítségével
-### RetrofitClient: tárolja a backend alap URL-jét, és legenerálja a BibleApiService interfész implementációját
-### BibleApiService: ebben az interfészben találhatóak az API hívások deklarációi
-### models mappa osztályai: a backendtől JSON-ként kapott adatokat képzik le Kotlin data classokra
-### NetworkModule: a fenti osztályokat injektálja az azokat használó osztályokba
+### BibleApiClient:
+Létrehoz egy implementált példányt a BibleApiService interfészből a RetrofitClient segítségével
+### RetrofitClient:
+Tárolja a backend alap URL-jét, és legenerálja a BibleApiService interfész implementációját
+### BibleApiService:
+Ebben az interfészben találhatóak az API hívások deklarációi
+### models mappa osztályai:
+A backendtől JSON-ként kapott adatokat képzik le Kotlin data classokra
+### NetworkModule:
+A fenti osztályokat injektálja az azokat használó osztályokba
 ## Adatbázis réteg osztályai
-### Chapter: definiálja a chapter adatbázis-táblát, és hogy milyen adatokat tárolunk a lementett fejezetekről
-### ChapterHeader: tartalmazza a mentett fejezetekről az azokat listázó nézeten megjelenített adatokat
-### ChapterDAO: a chapter tábla fölötti DAO osztály
-### AppDatabase: az adatbázist reprezentáló osztály, rajta keresztül érhető el a ChapterDAO is
-### DatabaseModule: a fenti osztályokat injektálja az azokat használó osztályokba
+### Chapter:
+Definiálja a chapter adatbázis-táblát, és hogy milyen adatokat tárolunk a lementett fejezetekről
+### ChapterHeader:
+Tartalmazza a mentett fejezetekről az azokat listázó nézeten megjelenített adatokat
+### ChapterDAO:
+A chapter tábla fölötti DAO osztály
+### AppDatabase:
+Az adatbázist reprezentáló osztály, rajta keresztül érhető el a ChapterDAO is
+### DatabaseModule:
+A fenti osztályokat injektálja az azokat használó osztályokba
 
 # Architektúra
 
