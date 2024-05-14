@@ -1,8 +1,10 @@
 package com.example.bibliapp.data.repositories
 
 import com.example.bibliapp.data.database.dao.ChapterDAO
+import dagger.hilt.android.scopes.ActivityScoped
 import javax.inject.Inject
 
+@ActivityScoped
 class FavoriteRepository @Inject constructor(
     val chapterDAO: ChapterDAO
 ) {

@@ -1,7 +1,6 @@
 package com.example.bibliapp.data.network.models
 
-data class BookSummary(
+data class Language(
     val id: String,
-    val abbreviation: String,
     val name: String
 )

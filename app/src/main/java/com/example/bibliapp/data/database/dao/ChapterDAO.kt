@@ -9,7 +9,7 @@ import com.example.bibliapp.data.database.entities.ChapterHeader
 
 @Dao
 interface ChapterDAO {
-    @Query("SELECT title, verseCount FROM chapter")
+    @Query("SELECT chapterId, title, verseCount FROM chapter")
     fun getChapterHeaders(): List<ChapterHeader>
 
     @Query("SELECT * FROM chapter WHERE chapterId = :chapterId")

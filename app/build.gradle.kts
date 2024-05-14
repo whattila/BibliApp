@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     kotlin("kapt")
-    id("com.google.dagger.hilt.android")
+    id("com.google.dagger.hilt.android") version "2.44" apply false
 }
 
 android {
@@ -19,6 +19,11 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
+        }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
+            }
         }
     }
 
@@ -67,14 +72,27 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation(libs.hilt.android)
-    annotationProcessor(libs.hilt.android.compiler)
+    implementation("com.google.dagger:hilt-android:2.44")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0") // nincs Marinak
+    annotationProcessor("com.google.dagger:hilt-android-compiler:2.44")
+    annotationProcessor("com.google.dagger:hilt-compiler:2.44") // nincs Marinak
+    implementation("androidx.hilt:hilt-work:1.0.0") // nincs Marinak
+    kapt("androidx.hilt:hilt-compiler:1.0.0") // nincs Marinak
+    implementation("androidx.work:work-runtime-ktx:2.8.1") // nincs Marinak
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
-    implementation(libs.androidx.room.runtime)
-    kapt(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.runtime) // nincs Marinak
+    kapt(libs.androidx.room.compiler) // nincs Marinak
+    implementation(libs.androidx.navigation.fragment.ktx) // nincs Marinak
+    implementation(libs.androidx.navigation.ui.ktx) // nincs Marinak
+    implementation(libs.androidx.navigation.compose)
 }
 
 kapt {
     correctErrorTypes = true
+    javacOptions {
+        option("-Adagger.fastInit=ENABLED")
+        option("-Adagger.hilt.android.internal.disableAndroidSuperclassValidation=true")
+        option("enable.some.option=true")
+    }
 }

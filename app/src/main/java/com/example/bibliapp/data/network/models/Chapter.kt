@@ -1,12 +1,10 @@
 package com.example.bibliapp.data.network.models
 
-import androidx.compose.runtime.Immutable
+import android.text.Html
 
-@Immutable
 data class Chapter(
-    // TODO: hol a fejezet címe?! Van neki egyáltalán?
     val summary: ChapterSummary,
-    val content: String,
+    val content: Html,
     val verseCount: Int,
     val nextId: String,
     val previousId: String,

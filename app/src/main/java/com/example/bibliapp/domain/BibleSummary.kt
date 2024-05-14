@@ -1,5 +1,8 @@
-package com.example.bibliapp.data.network.models
+package com.example.bibliapp.domain
 
+import androidx.compose.runtime.Immutable
+
+@Immutable
 data class BibleSummary(
     val id: String,
     val name: String,
@@ -8,6 +11,5 @@ data class BibleSummary(
     val abbreviationLocal: String,
     val description: String,
     val descriptionLocal: String,
-    val type: String,
-    val language: Language
+    //val language: Language
 )
