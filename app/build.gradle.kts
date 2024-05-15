@@ -59,6 +59,7 @@ android {
 dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx) // nincs Marinak
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
@@ -77,8 +78,9 @@ dependencies {
     annotationProcessor("com.google.dagger:hilt-android-compiler:2.44")
     annotationProcessor("com.google.dagger:hilt-compiler:2.44") // nincs Marinak
     implementation("androidx.hilt:hilt-work:1.0.0") // nincs Marinak
-    kapt("androidx.hilt:hilt-compiler:1.0.0") // nincs Marinak
+    annotationProcessor("androidx.hilt:hilt-compiler:1.0.0") // nincs Marinak
     implementation("androidx.work:work-runtime-ktx:2.8.1") // nincs Marinak
+    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0") // nincs Marinak
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.androidx.room.runtime) // nincs Marinak
