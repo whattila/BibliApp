@@ -1,8 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("com.google.dagger.hilt.android")
     kotlin("kapt")
-    id("com.google.dagger.hilt.android") version "2.44" apply false
 }
 
 android {
@@ -19,11 +19,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
-        }
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments["dagger.hilt.disableModulesHaveInstallInCheck"] = "true"
-            }
         }
     }
 
@@ -58,9 +53,9 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
     implementation(libs.androidx.lifecycle.viewmodel.ktx) // nincs Marinak
-    implementation(libs.androidx.activity.compose)
+    implementation("androidx.activity:activity-compose:1.3.1")
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
@@ -71,16 +66,21 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation("com.google.dagger:hilt-android-testing:2.51.1")
+    kaptAndroidTest("com.google.dagger:hilt-compiler:2.51.1")
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation("com.google.dagger:hilt-android:2.44")
-    implementation("androidx.hilt:hilt-navigation-compose:1.0.0") // nincs Marinak
-    annotationProcessor("com.google.dagger:hilt-android-compiler:2.44")
-    annotationProcessor("com.google.dagger:hilt-compiler:2.44") // nincs Marinak
-    implementation("androidx.hilt:hilt-work:1.0.0") // nincs Marinak
-    annotationProcessor("androidx.hilt:hilt-compiler:1.0.0") // nincs Marinak
+    implementation("androidx.compose.ui:ui:1.0.0")
+    implementation("androidx.compose.material:material:1.0.0")
+    implementation("androidx.compose.ui:ui-tooling-preview:1.0.0")
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    implementation("androidx.hilt:hilt-navigation-compose")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0") // nincs Marinak
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+    kapt("com.google.dagger:hilt-compiler:2.51.1") // nincs Marinak
+    implementation("androidx.hilt:hilt-work:1.2.0") // nincs Marinak
+    kapt("androidx.hilt:hilt-compiler:1.2.0") // nincs Marinak
     implementation("androidx.work:work-runtime-ktx:2.8.1") // nincs Marinak
-    implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0") // nincs Marinak
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.androidx.room.runtime) // nincs Marinak
@@ -92,9 +92,4 @@ dependencies {
 
 kapt {
     correctErrorTypes = true
-    javacOptions {
-        option("-Adagger.fastInit=ENABLED")
-        option("-Adagger.hilt.android.internal.disableAndroidSuperclassValidation=true")
-        option("enable.some.option=true")
-    }
 }
