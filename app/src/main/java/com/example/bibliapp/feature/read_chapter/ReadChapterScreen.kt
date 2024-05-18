@@ -11,6 +11,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
+// TODO: amikor ide navigálunk, le kell kérni a fejezetet a viewModeltől, reagálni a változásokra, menteni és törölni!
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReadChapterScreen (

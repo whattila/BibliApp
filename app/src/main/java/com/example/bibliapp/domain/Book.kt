@@ -4,6 +4,6 @@ import androidx.compose.runtime.Immutable
 
 @Immutable
 data class Book(
-    val bookSummary: BookSummary,
-    val chapters: List<ChapterSummary>
+    val bookSummary: BookSummary = BookSummary(),
+    val chapters: List<ChapterSummary> = emptyList()
 )

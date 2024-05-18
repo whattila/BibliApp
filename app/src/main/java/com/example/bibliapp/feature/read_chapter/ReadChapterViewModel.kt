@@ -7,6 +7,7 @@ import com.example.bibliapp.domain.Chapter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+// TODO: hogy döntjük el, hogy a fejezet mentve van-e vagy sem?
 @HiltViewModel
 class ReadChapterViewModel @Inject constructor(
     browseRepository: BrowseRepository,

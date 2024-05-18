@@ -1,23 +1,35 @@
 package com.example.bibliapp.feature.bible_select
 
-import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.bibliapp.data.repositories.BrowseRepository
-import com.example.bibliapp.domain.BibleSummary
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+// TODO: Az eredeti példában itt SavedStateHandle van. Az mire jó? Kell az nekünk?
+// TODO: a nyelveket hol kell kiválogatni? Itt vagy egy másik ViewModelben?
 @HiltViewModel
 class BibleSelectViewModel @Inject constructor(
-    browseRepository: BrowseRepository
+    private val browseRepository: BrowseRepository
 ) : ViewModel() {
+    var bibleListUiState: BibleListUiState by mutableStateOf(BibleListUiState.Loading)
+        private set
+    init {
+        getBibles()
+    }
 
-    private val _bibles = mutableStateListOf(
-        BibleSummary(id = "t1", name = "Test1", nameLocal = "Test1", abbreviation = "Test Bible", abbreviationLocal = "Test Bible", description = "This is a test Bible object", descriptionLocal = "This is a test Bible object"),
-        BibleSummary(id = "t2", name = "Test2", nameLocal = "Test2", abbreviation = "Test Bible", abbreviationLocal = "Test Bible", description = "This is a test Bible object", descriptionLocal = "This is a test Bible object")
-    )
-
-    fun getBibles(): List<BibleSummary> {
-        return _bibles;
+    private fun getBibles() {
+        viewModelScope.launch {
+            bibleListUiState = try {
+                val result = browseRepository.getAllBibles()
+                BibleListUiState.Success(result)
+            } catch (e: Exception) {
+                BibleListUiState.Error
+            }
+        }
     }
 }

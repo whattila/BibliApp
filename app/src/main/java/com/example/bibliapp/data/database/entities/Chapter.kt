@@ -6,6 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "chapter")
 data class Chapter(
+    // TODO: Mit tudunk ezek közül tényleg kiszedni a kapott adatokból? Mire van szükség?
     // Bár kapunk az API-tól egy id-t, az szerintem nem egyedi globálisan, így itt kell egy másik
     @PrimaryKey(autoGenerate = true) val chapterId: Long,
     @ColumnInfo(name = "title") val title: String,

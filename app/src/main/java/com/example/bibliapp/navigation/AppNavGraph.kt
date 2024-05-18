@@ -58,9 +58,9 @@ private fun NavGraphBuilder.showBookSelect(navController: NavController) {
         val bibleId = backStackEntry.arguments?.getString(LeafScreen.BookSelect.bibleId)
 
         BookSelectScreen(
-            bibleId = bibleId,
+            bibleId = bibleId!!,
             viewModel = hiltViewModel(),
-            onBookSelected = { bId: String?, bookId: String -> navController.navigate("${LeafScreen.ChapterSelect.route}/$bId/$bookId") },
+            onBookSelected = { bId: String, bookId: String -> navController.navigate("${LeafScreen.ChapterSelect.route}/$bId/$bookId") },
         )
     }
 }
@@ -77,10 +77,10 @@ private fun NavGraphBuilder.showChapterSelect(navController: NavController) {
         val bookId = backStackEntry.arguments?.getString(LeafScreen.ChapterSelect.bookId)
 
         ChapterSelectScreen(
-            bibleId = bibleId,
-            bookId = bookId,
+            bibleId = bibleId!!,
+            bookId = bookId!!,
             viewModel = hiltViewModel(),
-            onChapterSelected = { bId: String?, chapterId: String -> navController.navigate("${LeafScreen.ReadChapter.route}?${LeafScreen.ReadChapter.bibleId}=$bId&${LeafScreen.ReadChapter.chapterId}=$chapterId") },
+            onChapterSelected = { bId: String, chapterId: String -> navController.navigate("${LeafScreen.ReadChapter.route}?${LeafScreen.ReadChapter.bibleId}=$bId&${LeafScreen.ReadChapter.chapterId}=$chapterId") },
         )
     }
 }

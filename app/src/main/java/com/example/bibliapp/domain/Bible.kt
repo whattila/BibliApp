@@ -4,6 +4,6 @@ import androidx.compose.runtime.Immutable
 
 @Immutable
 data class Bible(
-    val summary: BibleSummary,
-    val books: List<BookSummary>
+    val summary: BibleSummary = BibleSummary(),
+    val books: List<BookSummary> = emptyList()
 )

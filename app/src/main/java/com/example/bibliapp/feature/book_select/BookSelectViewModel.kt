@@ -1,31 +1,33 @@
 package com.example.bibliapp.feature.book_select
 
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.bibliapp.data.repositories.BrowseRepository
 import com.example.bibliapp.domain.Bible
 import com.example.bibliapp.domain.BibleSummary
 import com.example.bibliapp.domain.BookSummary
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class BookSelectViewModel @Inject constructor(
-    browseRepository: BrowseRepository
+    private val browseRepository: BrowseRepository
 ) : ViewModel() {
+    var bibleUiState: BibleUiState by mutableStateOf(BibleUiState.Loading)
+        private set
 
-    private val _bible = mutableStateOf(
-        Bible(
-            summary = BibleSummary(id = "t1", name = "Test1", nameLocal = "Test1", abbreviation = "Test Bible", abbreviationLocal = "Test Bible", description = "This is a test Bible object", descriptionLocal = "This is a test Bible object"),
-            books = listOf(
-                BookSummary(id = "book1", name = "Book1"),
-                BookSummary(id = "book2", name = "Book2")
-            )
-        )
-    )
-
-    // TODO: így kell visszaadni, ha azt szeretném, hogy a felület reagáljon a változásokra?
-    fun getBible(): Bible {
-        return _bible.value;
+    fun fetchBible(bibleId: String) {
+        viewModelScope.launch {
+            bibleUiState = try {
+                val result = browseRepository.getBible(bibleId)
+                BibleUiState.Success(result)
+            } catch (e: Exception) {
+                BibleUiState.Error
+            }
+        }
     }
 }
