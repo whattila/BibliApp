@@ -1,6 +1,10 @@
 package com.example.bibliapp.feature.read_chapter
 
+import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -9,9 +13,15 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.viewinterop.AndroidView
+import com.example.bibliapp.ui.common.ErrorView
+import com.example.bibliapp.ui.common.LoadingView
+import com.example.bibliapp.domain.Chapter
+import com.google.android.material.textview.MaterialTextView
 
-// TODO: amikor ide navigálunk, le kell kérni a fejezetet a viewModeltől, reagálni a változásokra, menteni és törölni!
+// TODO: Menteni és törölni!
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReadChapterScreen (
@@ -20,6 +30,9 @@ fun ReadChapterScreen (
     databaseChapterId: Long?,
     viewModel: ReadChapterViewModel
 ){
+    LaunchedEffect(key1 = bibleId, key2 = chapterId) {
+        viewModel.fetchChapter(bibleId!!, chapterId!!) // TODO: Itt később 3 paraméter lesz, és a viewModelben ellenőrizni kell az érvényességüket!
+    }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -27,7 +40,7 @@ fun ReadChapterScreen (
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.primary,
                 ),
-                title = { Text("Viewing: getChapter() not implemented yet!") },
+                title = { Text("Viewing: ${ if (viewModel.chapterUiState is ChapterUiState.Success) (viewModel.chapterUiState as ChapterUiState.Success).result.reference else "" }") },
                 actions = {
                     TextButton(onClick = { /*TODO: save and delete*/ }
                     ) {
@@ -36,10 +49,24 @@ fun ReadChapterScreen (
                 }
             )
         },
-    ) { innerPadding ->
-        Text(
-            modifier = Modifier.padding(innerPadding),
-            text = "Home Screen", style = MaterialTheme.typography.headlineMedium
-        )
+    ) { paddingValues -> when (viewModel.chapterUiState) {
+            is ChapterUiState.Loading -> LoadingView(paddingValues)
+            is ChapterUiState.Success -> ResultView(
+                (viewModel.chapterUiState as ChapterUiState.Success).result,
+                paddingValues)
+            is ChapterUiState.Error -> ErrorView(paddingValues)
+        }
     }
+}
+
+@Composable
+fun ResultView (
+    chapter: Chapter,
+    paddingValues: PaddingValues
+) {
+    AndroidView(
+        modifier = Modifier.padding(paddingValues).verticalScroll(rememberScrollState()),
+        factory = { MaterialTextView(it) },
+        update = { it.text = chapter.content }
+    )
 }

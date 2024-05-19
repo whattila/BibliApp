@@ -16,12 +16,12 @@ data class BibleDTO(
     fun toDomain(): BibleSummary {
         return BibleSummary(
             id = id,
-            name = name ?: "No name available",
-            nameLocal = nameLocal ?: "No name available",
-            abbreviation = abbreviation ?: "No abbreviation available",
-            abbreviationLocal = abbreviationLocal ?: "No abbreviation available",
-            description = description ?: "No description available",
-            descriptionLocal = descriptionLocal ?: "No description available",
+            name = name ?: "No name",
+            nameLocal = nameLocal ?: "No name",
+            abbreviation = abbreviation ?: "No abbreviation",
+            abbreviationLocal = abbreviationLocal ?: "No abbreviation",
+            description = description ?: "No description",
+            descriptionLocal = descriptionLocal ?: "No description",
         )
     }
 }

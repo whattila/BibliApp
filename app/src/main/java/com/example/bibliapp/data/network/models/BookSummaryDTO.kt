@@ -9,7 +9,7 @@ data class BookSummaryDTO(
     fun toDomain(): BookSummary {
         return BookSummary(
             id = id,
-            name = name ?: "No name available"
+            name = name ?: "No name"
         )
     }
 }

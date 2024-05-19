@@ -7,13 +7,13 @@ import com.example.bibliapp.data.network.models.createDomainBible
 import com.example.bibliapp.domain.Bible
 import com.example.bibliapp.domain.BibleSummary
 import com.example.bibliapp.domain.Book
+import com.example.bibliapp.domain.Chapter
 import dagger.hilt.android.scopes.ActivityScoped
 import retrofit2.HttpException
 import retrofit2.awaitResponse
 import java.io.IOException
 import javax.inject.Inject
 
-// TODO: itt kell konvertálni a domain és a network/models osztályai közt! Coroutine-okat kell használni!
 @ActivityScoped
 class BrowseRepository @Inject constructor(
     private val bibleApiService: BibleApiService
@@ -64,6 +64,23 @@ class BrowseRepository @Inject constructor(
             }
             else {
                 Book()
+            }
+        } catch (e: IOException) {
+            throw e
+        } catch (e: HttpException) {
+            throw e
+        }
+    }
+
+    suspend fun getChapter(bibleId: String, chapterId: String): Chapter {
+        return try {
+            val response = bibleApiService.getChapter(bibleId, chapterId).awaitResponse()
+            if (response.isSuccessful) {
+                val responseBody = response.body()
+                responseBody?.data?.toDomain() ?: Chapter()
+            }
+            else {
+                Chapter()
             }
         } catch (e: IOException) {
             throw e

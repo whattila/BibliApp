@@ -12,7 +12,7 @@ data class BookDTO(
         return Book(
             bookSummary = BookSummary(
                 id = id,
-                name = name ?: "No name available"
+                name = name ?: "No name"
             ),
             chapters = chapters?.map { it.toDomain() } ?: emptyList()
         )

@@ -1,12 +1,12 @@
 package com.example.bibliapp.domain
 
 import android.text.Html
+import android.text.Spanned
 import androidx.compose.runtime.Immutable
 
 @Immutable
 data class Chapter(
-    val summary: ChapterSummary,
-    val content: String,
-    val verseCount: Int,
-    val copyright: String
+    val reference: String = "",
+    val content: Spanned = Html.fromHtml("", 0), // lehetne itt valami jobb?
+    val verseCount: Int = -1,
 )
