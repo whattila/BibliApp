@@ -8,11 +8,9 @@ data class ChapterDTO(
     val content: String,
     val verseCount: Int?, // Ez biztos kell? Ha nem, töröljük!
 ) {
-    fun toDomain(): Chapter {
-        return Chapter(
+    fun toDomain(): Chapter =
+        Chapter(
             reference = reference ?: "No reference",
             content = Html.fromHtml(content, 0),
-            verseCount = verseCount ?: -1
-        )
-    }
+            verseCount = verseCount ?: -1)
 }

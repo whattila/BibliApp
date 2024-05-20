@@ -85,6 +85,7 @@ dependencies {
     implementation(libs.converter.gson)
     implementation(libs.androidx.room.runtime) // nincs Marinak
     kapt(libs.androidx.room.compiler) // nincs Marinak
+    implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.navigation.fragment.ktx) // nincs Marinak
     implementation(libs.androidx.navigation.ui.ktx) // nincs Marinak
     implementation(libs.androidx.navigation.compose)

@@ -6,10 +6,8 @@ data class BookSummaryDTO(
     val id: String,
     val name: String?
 ) {
-    fun toDomain(): BookSummary {
-        return BookSummary(
+    fun toDomain(): BookSummary =
+        BookSummary(
             id = id,
-            name = name ?: "No name"
-        )
-    }
+            name = name ?: "No name")
 }

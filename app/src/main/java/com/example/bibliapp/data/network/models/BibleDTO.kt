@@ -13,15 +13,13 @@ data class BibleDTO(
     val type: String? = "",
     val language: LanguageDTO = LanguageDTO()
 ) {
-    fun toDomain(): BibleSummary {
-        return BibleSummary(
+    fun toDomain(): BibleSummary =
+        BibleSummary(
             id = id,
             name = name ?: "No name",
             nameLocal = nameLocal ?: "No name",
             abbreviation = abbreviation ?: "No abbreviation",
             abbreviationLocal = abbreviationLocal ?: "No abbreviation",
             description = description ?: "No description",
-            descriptionLocal = descriptionLocal ?: "No description",
-        )
-    }
+            descriptionLocal = descriptionLocal ?: "No description",)
 }

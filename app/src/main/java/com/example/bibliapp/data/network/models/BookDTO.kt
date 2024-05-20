@@ -8,13 +8,11 @@ data class BookDTO(
     val name: String? = "",
     val chapters: List<ChapterSummaryDTO>? = emptyList()
 ) {
-    fun toDomain(): Book {
-        return Book(
+    fun toDomain(): Book =
+        Book(
             bookSummary = BookSummary(
                 id = id,
                 name = name ?: "No name"
             ),
-            chapters = chapters?.map { it.toDomain() } ?: emptyList()
-        )
-    }
+            chapters = chapters?.map { it.toDomain() } ?: emptyList())
 }

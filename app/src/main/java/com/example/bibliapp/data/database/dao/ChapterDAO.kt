@@ -3,21 +3,23 @@ package com.example.bibliapp.data.database.dao
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.bibliapp.data.database.entities.Chapter
 import com.example.bibliapp.data.database.entities.ChapterHeader
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ChapterDAO {
-    @Query("SELECT chapterId, title, verseCount FROM chapter")
-    fun getChapterHeaders(): List<ChapterHeader>
+    @Query("SELECT id, reference, verseCount FROM chapter")
+    fun getChapterHeaders(): Flow<List<ChapterHeader>>
 
-    @Query("SELECT * FROM chapter WHERE chapterId = :chapterId")
-    fun getChapter(chapterId: Long): Chapter
+    @Query("SELECT * FROM chapter WHERE id = :id")
+    suspend fun getChapter(id: Long): Chapter // nem biztos hogy ez így jó, lehet hogy Flow kell suspend nélkül!
 
-    @Insert
-    fun insertChapter(chapter: Chapter)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertChapter(chapter: Chapter)
 
     @Delete
-    fun deleteChapter(chapter: Chapter)
+    suspend fun deleteChapter(chapter: Chapter)
 }

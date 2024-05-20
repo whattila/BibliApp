@@ -26,7 +26,7 @@ fun AppNavGraph(
     ) {
         addSelectRoute(navController)
         addFavoritesRoute(navController)
-        addReadRoute(navController)
+        addReadRoute()
     }
 }
 
@@ -102,15 +102,15 @@ private fun NavGraphBuilder.showFavoriteChapters(navController: NavController) {
     }
 }
 
-private fun NavGraphBuilder.addReadRoute(navController: NavController) {
+private fun NavGraphBuilder.addReadRoute() {
     navigation(
         route = RootScreen.Read.route,
         startDestination = LeafScreen.ReadChapter.routeWithArguments
     ) {
-        showReadChapter(navController)
+        showReadChapter()
     }
 }
-private fun NavGraphBuilder.showReadChapter(navController: NavController) {
+private fun NavGraphBuilder.showReadChapter() {
     composable(
         route = LeafScreen.ReadChapter.routeWithArguments,
         arguments = listOf(
@@ -124,7 +124,7 @@ private fun NavGraphBuilder.showReadChapter(navController: NavController) {
             },
             navArgument(LeafScreen.ReadChapter.databaseChapterId) {
                 type = NavType.LongType
-                defaultValue = -1
+                defaultValue = 0
             }
         )
     ) { backStackEntry ->
@@ -132,6 +132,6 @@ private fun NavGraphBuilder.showReadChapter(navController: NavController) {
         val chapterId = backStackEntry.arguments?.getString(LeafScreen.ReadChapter.chapterId)
         val databaseChapterId = backStackEntry.arguments?.getLong(LeafScreen.ReadChapter.databaseChapterId)
 
-        ReadChapterScreen(bibleId = bibleId, chapterId = chapterId, databaseChapterId = databaseChapterId, viewModel = hiltViewModel())
+        ReadChapterScreen(bibleId = bibleId, chapterId = chapterId, databaseChapterId = databaseChapterId!!, viewModel = hiltViewModel())
     }
 }
