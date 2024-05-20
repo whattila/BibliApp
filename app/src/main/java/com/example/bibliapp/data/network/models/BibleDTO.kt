@@ -21,5 +21,7 @@ data class BibleDTO(
             abbreviation = abbreviation ?: "No abbreviation",
             abbreviationLocal = abbreviationLocal ?: "No abbreviation",
             description = description ?: "No description",
-            descriptionLocal = descriptionLocal ?: "No description",)
+            descriptionLocal = descriptionLocal ?: "No description",
+            language = language.toDomain()
+        )
 }

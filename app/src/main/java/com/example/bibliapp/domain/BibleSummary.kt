@@ -11,5 +11,5 @@ data class BibleSummary(
     val abbreviationLocal: String = "",
     val description: String = "",
     val descriptionLocal: String = "",
-    //val language: Language
+    val language: Language = Language()
 )

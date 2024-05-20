@@ -22,7 +22,7 @@ import com.example.bibliapp.ui.common.LoadingView
 import com.google.android.material.textview.MaterialTextView
 import kotlinx.coroutines.launch
 
-// TODO: Menteni (és törölni) !
+// TODO: Törölni!
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReadChapterScreen (

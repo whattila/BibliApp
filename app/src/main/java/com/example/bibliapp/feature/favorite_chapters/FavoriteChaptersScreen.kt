@@ -31,7 +31,6 @@ import androidx.compose.ui.unit.dp
 import com.example.bibliapp.domain.ChapterHeader
 import kotlinx.coroutines.launch
 
-// TODO: amikor ide navigálunk, le kell kérni a kedvenc fejezetket a viewModeltől, továbbítani a kéréseket és reagálni a változásokra!
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoriteChaptersScreen (

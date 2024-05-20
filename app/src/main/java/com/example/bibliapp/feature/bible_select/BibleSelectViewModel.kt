@@ -6,12 +6,14 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bibliapp.data.repositories.BrowseRepository
+import com.example.bibliapp.domain.BibleSummary
+import com.example.bibliapp.domain.Language
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.util.LinkedHashMap
 import javax.inject.Inject
 
 // TODO: Az eredeti példában itt SavedStateHandle van. Az mire jó? Kell az nekünk?
-// TODO: a nyelveket hol kell kiválogatni? Itt vagy egy másik ViewModelben?
 @HiltViewModel
 class BibleSelectViewModel @Inject constructor(
     private val browseRepository: BrowseRepository
@@ -19,17 +21,33 @@ class BibleSelectViewModel @Inject constructor(
     var bibleListUiState: BibleListUiState by mutableStateOf(BibleListUiState.Loading)
         private set
     init {
-        getBibles()
+        getBiblesSectioned()
     }
 
-    private fun getBibles() {
+    private fun getBiblesSectioned() {
         viewModelScope.launch {
             bibleListUiState = try {
                 val result = browseRepository.getAllBibles()
-                BibleListUiState.Success(result)
+                val sectionedResult = createSectionsByLanguage(result)
+                BibleListUiState.Success(sectionedResult)
             } catch (e: Exception) {
                 BibleListUiState.Error
             }
         }
+    }
+
+    private fun createSectionsByLanguage(bibleList: List<BibleSummary>): List<SectionData> {
+        val sectionedBibles = LinkedHashMap<Language, MutableList<BibleSummary>>()
+        bibleList.forEach {
+            if ( ! sectionedBibles.containsKey(it.language)) {
+                sectionedBibles[it.language] = mutableListOf()
+            }
+            sectionedBibles[it.language]?.add(it)
+        }
+        val sectionList = mutableListOf<SectionData>()
+        sectionedBibles.forEach { (language, bibles) ->
+            sectionList.add(SectionData(language = language, bibles = bibles))
+        }
+        return sectionList.toList() // Ezt még rendezhetnénk nyelv alapján
     }
 }

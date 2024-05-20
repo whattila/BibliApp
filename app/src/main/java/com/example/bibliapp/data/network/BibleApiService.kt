@@ -9,10 +9,8 @@ import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
 
-// TODO: kell valamit még tenni az aszinkronitásért (itt és máshol) ?
 interface BibleApiService {
-    // esetleg nem lehet ezt a headert kiszervezni valahova?
-    // Erről itt:
+    // A header kiszervezéséről:
     // https://medium.com/@jeremy.leyvraz/kotlin-simplify-your-api-calls-with-elegance-with-retrofit-1be6da7adae4
     // https://square.github.io/okhttp/features/interceptors/
     @Headers(
