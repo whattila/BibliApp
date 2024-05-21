@@ -27,6 +27,7 @@ import androidx.compose.runtime.snapshots.SnapshotStateMap
 import androidx.compose.runtime.toMutableStateMap
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.example.bibliapp.domain.BibleSummary
 import com.example.bibliapp.ui.common.ErrorView
@@ -42,8 +43,8 @@ fun BibleSelectScreen (
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
+                    containerColor = MaterialTheme.colorScheme.surfaceTint,
+                    titleContentColor = MaterialTheme.colorScheme.onPrimary,
                 ),
                 title = { Text("Select a Bible") }
             )
@@ -120,7 +121,7 @@ fun SectionHeader(
         .padding(vertical = 8.dp, horizontal = 16.dp)) {
         Text(
             text = text,
-            style = MaterialTheme.typography.titleSmall,
+            style = MaterialTheme.typography.titleLarge,
             modifier = Modifier.weight(1.0f)
         )
         if (isExpanded) {
@@ -145,7 +146,10 @@ fun SectionItem(
     TextButton(
         onClick = { onSelected(bibleSummary.id) }
     ) {
-        Text("${bibleSummary.abbreviationLocal} ${bibleSummary.nameLocal} - ${bibleSummary.descriptionLocal}")
+        Text(
+           text = "${bibleSummary.abbreviationLocal} - ${bibleSummary.nameLocal} - ${bibleSummary.descriptionLocal}",
+            style = MaterialTheme.typography.bodyLarge
+        )
     }
 }
 

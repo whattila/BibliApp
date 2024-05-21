@@ -3,6 +3,8 @@ package com.example.bibliapp.feature.chapter_select
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -39,8 +41,8 @@ fun ChapterSelectScreen (
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
+                    containerColor = MaterialTheme.colorScheme.surfaceTint,
+                    titleContentColor = MaterialTheme.colorScheme.onPrimary,
                 ),
                 title = { Text("Viewing: ${ if (viewModel.bookUiState is BookUiState.Success) (viewModel.bookUiState as BookUiState.Success).result.bookSummary.name else "" }") }
             )
@@ -67,7 +69,8 @@ fun ResultView(
     Column(
         modifier = Modifier.padding(paddingValues)
     ) {
-        Text("SELECT A CHAPTER:", fontSize = 30.sp)
+        Text("SELECT A CHAPTER:", style = MaterialTheme.typography.headlineLarge)
+        Spacer(modifier = Modifier.height(8.dp))
         LazyVerticalGrid(
             columns = GridCells.Fixed(3),
             contentPadding = PaddingValues(8.dp)

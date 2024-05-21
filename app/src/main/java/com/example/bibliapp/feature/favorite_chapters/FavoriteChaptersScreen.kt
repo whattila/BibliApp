@@ -43,8 +43,8 @@ fun FavoriteChaptersScreen (
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
+                    containerColor = MaterialTheme.colorScheme.surfaceTint,
+                    titleContentColor = MaterialTheme.colorScheme.onPrimary,
                 ),
                 title = { Text("My favorite chapters") }
             )
@@ -92,7 +92,7 @@ fun FavoriteChaptersListView(
                 Row(
                     modifier = Modifier.padding(20.dp),
                 ) {
-                    Text(it.reference)
+                    Text(text = it.reference, style = MaterialTheme.typography.headlineSmall)
                     Spacer(modifier = Modifier.fillMaxSize(0.7f))
                     // TODO: itt lehetne egy Checkbox(), hogy egyszerre többet is törölhessünk. Akkor az alsó Spacer kikommentezését is töröljük!
                     // Spacer(modifier = Modifier.width(10.dp))

@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.viewinterop.AndroidView
 import com.example.bibliapp.domain.Chapter
 import com.example.bibliapp.ui.common.ErrorView
@@ -41,8 +42,8 @@ fun ReadChapterScreen (
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
+                    containerColor = MaterialTheme.colorScheme.surfaceTint,
+                    titleContentColor = MaterialTheme.colorScheme.onPrimary,
                 ),
                 title = { Text("Viewing: ${ if (viewModel.chapterUiState is ChapterUiState.Success) (viewModel.chapterUiState as ChapterUiState.Success).result.reference else "" }") },
                 actions = {
@@ -56,7 +57,9 @@ fun ReadChapterScreen (
                         }
                     }
                     ) {
-                        Text("SAVE") // TODO: SAVE if not saved to favorites, else DELETE
+                        Text(text = "SAVE",
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            style = MaterialTheme.typography.titleLarge) // TODO: SAVE if not saved to favorites, else DELETE
                     }
                 }
             )

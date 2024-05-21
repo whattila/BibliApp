@@ -46,8 +46,10 @@ class BibleSelectViewModel @Inject constructor(
         }
         val sectionList = mutableListOf<SectionData>()
         sectionedBibles.forEach { (language, bibles) ->
+            bibles.sortBy { it.abbreviationLocal }
             sectionList.add(SectionData(language = language, bibles = bibles))
         }
+        sectionList.sortBy { it.language.name }
         return sectionList.toList() // Ezt még rendezhetnénk nyelv alapján
     }
 }

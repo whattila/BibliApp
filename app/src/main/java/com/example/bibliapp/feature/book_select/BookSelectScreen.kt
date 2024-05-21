@@ -3,6 +3,10 @@ package com.example.bibliapp.feature.book_select
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.calculateEndPadding
+import androidx.compose.foundation.layout.calculateStartPadding
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -17,6 +21,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.bibliapp.domain.Bible
 import com.example.bibliapp.ui.common.ErrorView
@@ -36,8 +42,8 @@ fun BookSelectScreen (
         topBar = {
             TopAppBar(
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
+                    containerColor = MaterialTheme.colorScheme.surfaceTint,
+                    titleContentColor = MaterialTheme.colorScheme.onPrimary,
                 ),
                 title = { Text("Viewing: ${ if (viewModel.bibleUiState is BibleUiState.Success) (viewModel.bibleUiState as BibleUiState.Success).result.summary.nameLocal else "" }") }
             )
@@ -64,13 +70,18 @@ fun ResultView(
     Column(
         modifier = Modifier.padding(paddingValues)
     ) {
-        Text("SELECT A BOOK:", fontSize = 30.sp)
-        LazyColumn(modifier = Modifier.padding(paddingValues)) {
+        Text("SELECT A BOOK:", style = MaterialTheme.typography.headlineLarge)
+        LazyColumn(modifier = Modifier.padding(
+            top = 20.dp,
+            start = paddingValues.calculateStartPadding(LayoutDirection.Ltr),
+            end = paddingValues.calculateEndPadding(LayoutDirection.Ltr),
+            bottom = paddingValues.calculateBottomPadding())
+        ) {
             items(bible.books) {
                 TextButton(
                     onClick = { onBookSelected(bibleId, it.id) }
                 ) {
-                    Text(it.name)
+                    Text(text = it.name, style = MaterialTheme.typography.headlineSmall)
                 }
             }
         }
