@@ -1,5 +1,7 @@
 package com.example.bibliapp.feature.read_chapter
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
@@ -16,6 +18,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
 import com.example.bibliapp.domain.Chapter
 import com.example.bibliapp.ui.common.ErrorView
@@ -37,6 +41,7 @@ fun ReadChapterScreen (
     }
 
     val coroutineScope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     Scaffold(
         topBar = {
@@ -51,7 +56,7 @@ fun ReadChapterScreen (
                         coroutineScope.launch {
                             if (viewModel.chapterUiState is ChapterUiState.Success) {
                                 viewModel.saveChapter((viewModel.chapterUiState as ChapterUiState.Success).result)
-                                // TODO: show toast after saved
+                                makeToast(context, "Chapter saved to favorites")
                                 // TODO: delete if saved
                             }
                         }
@@ -67,21 +72,39 @@ fun ReadChapterScreen (
     ) { paddingValues -> when (viewModel.chapterUiState) {
             is ChapterUiState.Loading -> LoadingView(paddingValues)
             is ChapterUiState.Success -> ResultView(
-                (viewModel.chapterUiState as ChapterUiState.Success).result,
-                paddingValues)
+                chapter = (viewModel.chapterUiState as ChapterUiState.Success).result,
+                paddingValues = paddingValues,
+                textSize = 24f,
+                textColor = Color.Black.toArgb())
             is ChapterUiState.Error -> ErrorView(paddingValues)
         }
     }
 }
 
 @Composable
-fun ResultView (
+fun ResultView(
     chapter: Chapter,
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
+    textSize: Float, // Paraméter a szöveg méretéhez
+    textColor: Int   // Paraméter a szöveg színéhez
 ) {
     AndroidView(
         modifier = Modifier.padding(paddingValues).verticalScroll(rememberScrollState()),
-        factory = { MaterialTextView(it) },
-        update = { it.text = chapter.content }
+        factory = { context ->
+            MaterialTextView(context).apply {
+                this.textSize = textSize // Beállítjuk a szöveg méretét
+                this.setTextColor(textColor) // Beállítjuk a szöveg színét
+            }
+        },
+        update = {
+            it.text = chapter.content
+            it.textSize = textSize // Biztosítjuk, hogy az update-ben is beállítjuk
+            it.setTextColor(textColor) // Biztosítjuk, hogy az update-ben is beállítjuk
+        }
     )
+}
+
+// Function to generate a Toast
+private fun makeToast(context: Context, text: String) {
+    Toast.makeText(context, text, Toast.LENGTH_LONG).show()
 }

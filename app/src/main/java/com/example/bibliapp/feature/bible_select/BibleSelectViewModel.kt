@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import java.util.LinkedHashMap
 import javax.inject.Inject
 
-// TODO: Az eredeti példában itt SavedStateHandle van. Az mire jó? Kell az nekünk?
+// Az eredeti példában itt SavedStateHandle van. Az mire jó? Kell az nekünk?
 @HiltViewModel
 class BibleSelectViewModel @Inject constructor(
     private val browseRepository: BrowseRepository

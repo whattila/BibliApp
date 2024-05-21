@@ -55,7 +55,6 @@ interface BibleApiService {
             "api-key: 93c78c3cdbf7407bf4016ad0d81e4a56"
         ]
     )
-    // TODO: ennek a kérésnek sokféle paramétert lehet adni! Vizsgáljuk meg ezeket, és döntsük el, hogy melyiket mire érdemes állítani!
     @GET("bibles/{bibleId}/chapters/{chapterId}")
     fun getChapter(@Path("bibleId") bibleId: String, @Path("chapterId") chapterId: String): Call<ResponseBody<ChapterDTO>>
 }

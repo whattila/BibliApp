@@ -1,5 +1,6 @@
 package com.example.bibliapp.feature.favorite_chapters
 
+import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -71,7 +72,7 @@ fun EmptyListView(paddingValues: PaddingValues) {
             .padding(paddingValues),
         contentAlignment = Alignment.Center
     ) {
-        Text(text = "You don't have any favorites", color = MaterialTheme.colorScheme.error)
+        Text(text = "You don't have any favorites", color = MaterialTheme.colorScheme.primary)
     }
 }
 
@@ -94,7 +95,7 @@ fun FavoriteChaptersListView(
                 ) {
                     Text(text = it.reference, style = MaterialTheme.typography.headlineSmall)
                     Spacer(modifier = Modifier.fillMaxSize(0.7f))
-                    // TODO: itt lehetne egy Checkbox(), hogy egyszerre többet is törölhessünk. Akkor az alsó Spacer kikommentezését is töröljük!
+                    // itt lehetne egy Checkbox(), hogy egyszerre többet is törölhessünk. Akkor az alsó Spacer kikommentezését is töröljük!
                     // Spacer(modifier = Modifier.width(10.dp))
                     IconButton(
                         onClick = { coroutineScope.launch {

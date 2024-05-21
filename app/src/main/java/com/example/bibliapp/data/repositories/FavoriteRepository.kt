@@ -1,5 +1,6 @@
 package com.example.bibliapp.data.repositories
 
+import androidx.core.text.toHtml
 import com.example.bibliapp.data.database.dao.ChapterDAO
 import com.example.bibliapp.domain.Chapter
 import com.example.bibliapp.domain.ChapterHeader
@@ -24,7 +25,7 @@ class FavoriteRepository @Inject constructor(
         chapterDAO.insertChapter(
             com.example.bibliapp.data.database.entities.Chapter(
                 reference = chapter.reference,
-                content = chapter.content.toString(),
+                content = chapter.content.toHtml(),
                 verseCount = chapter.verseCount
             )
         )
