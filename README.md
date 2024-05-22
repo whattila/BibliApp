@@ -1,3 +1,5 @@
+# A bemutató videó linkje
+https://www.youtube.com/watch?v=cSIID6YKK4o
 # Hálózati réteg és adatbázis
 ## Hálózati réteg osztályai
 ### BibleApiClient:
