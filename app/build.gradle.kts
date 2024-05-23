@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.dagger.hilt.android")
     kotlin("kapt")
+    alias(libs.plugins.googleGmsGoogleServices)
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -61,6 +63,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.firebase.analytics)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -89,6 +92,12 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx) // nincs Marinak
     implementation(libs.androidx.navigation.ui.ktx) // nincs Marinak
     implementation(libs.androidx.navigation.compose)
+    // Import the BoM for the Firebase platform
+    implementation(platform(libs.firebase.bom))
+    // Add the dependency for the Analytics library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation(libs.google.firebase.crashlytics)
+    implementation(libs.google.firebase.analytics)
 }
 
 kapt {

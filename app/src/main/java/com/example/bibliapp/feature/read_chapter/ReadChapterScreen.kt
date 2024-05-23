@@ -1,5 +1,6 @@
 package com.example.bibliapp.feature.read_chapter
 
+import android.app.Activity
 import android.content.Context
 import android.widget.Toast
 import androidx.compose.foundation.layout.PaddingValues
@@ -21,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
+import com.example.bibliapp.MainActivity
 import com.example.bibliapp.domain.Chapter
 import com.example.bibliapp.ui.common.ErrorView
 import com.example.bibliapp.ui.common.LoadingView
@@ -57,6 +59,7 @@ fun ReadChapterScreen (
                             if (viewModel.chapterUiState is ChapterUiState.Success) {
                                 viewModel.saveChapter((viewModel.chapterUiState as ChapterUiState.Success).result)
                                 makeToast(context, "Chapter saved to favorites")
+                                chapterId?.let { (context as MainActivity).logChapterSave(bibleId = bibleId!!, chapterId = chapterId) }
                                 // TODO: delete if saved
                             }
                         }

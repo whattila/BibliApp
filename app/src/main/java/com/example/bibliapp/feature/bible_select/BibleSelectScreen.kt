@@ -46,7 +46,14 @@ fun BibleSelectScreen (
                     containerColor = MaterialTheme.colorScheme.surfaceTint,
                     titleContentColor = MaterialTheme.colorScheme.onPrimary,
                 ),
-                title = { Text("Select a Bible") }
+                title = { Text("Select a Bible") },
+                actions = {
+                    TextButton(onClick = { throw RuntimeException("Test Crash") }) {
+                        Text(text = "CRASH",
+                            color = MaterialTheme.colorScheme.onPrimary,
+                            style = MaterialTheme.typography.titleLarge)
+                    }
+                }
             )
         },
     ) { paddingValues -> when (viewModel.bibleListUiState) {
