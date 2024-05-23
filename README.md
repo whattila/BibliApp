@@ -1,6 +1,6 @@
 # Tesztek és analitika
 Screenshot az összeomlásokról a kontrol panelen:<br>
-<img src="./assets/crash.png" width="160">
+<img src="./assets/crash.png" width="200">
 # Felület és üzleti logika
 A bemutató videó linkje: https://www.youtube.com/watch?v=cSIID6YKK4o
 # Hálózati réteg és adatbázis
