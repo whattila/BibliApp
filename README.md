@@ -1,8 +1,13 @@
 # Tesztek és analitika
+## Analitika és Crashlytics
 Screenshot az eseményekről a kontrol panelen. A chapter_save eseményt én definiáltam:<br>
 <img src="./assets/events.png" width="200"><br>
 Screenshot az összeomlásokról a kontrol panelen:<br>
 <img src="./assets/crash.png" width="200">
+## Teszt stratégia
+Az alkalmzáson unit teszteket hajtok végre.<br>
+Az alkalmazásban alacsony, közepes és súlyos problémát is okozhat az alkalmazáslogika helytelen implementálása. A unit tesztek célja kiküszöbölni ezeket a problémákat.<br>
+A unit tesztek célja, hogy ellenőrizzék, hogy az alkalmazás platform-független osztályai (ViewModelek, repositoryk, model osztályok) jól működnek a gyakori és a szélsőséges esetekben. Akkor sikeres a unit tesztelés, ha minden teszt sikeresen lefutott. Nem fednek le minden osztály minden metódusát, azokat viszont igen, ahol nem egyértelmű a lefutás forgatókönyve.<br>
 # Felület és üzleti logika
 A bemutató videó linkje: https://www.youtube.com/watch?v=cSIID6YKK4o
 # Hálózati réteg és adatbázis

@@ -51,6 +51,11 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    testOptions {
+        unitTests {
+            isIncludeAndroidResources = true
+        }
+    }
 }
 
 dependencies {
@@ -65,6 +70,9 @@ dependencies {
     implementation(libs.androidx.material3)
     implementation(libs.firebase.analytics)
     testImplementation(libs.junit)
+    testImplementation (libs.robolectric)
+    testImplementation (libs.mockito.core)
+    testImplementation (libs.mockito.kotlin)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
