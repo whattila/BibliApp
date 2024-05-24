@@ -1,6 +1,6 @@
 # Tesztek és analitika
 Screenshot az eseményekről a kontrol panelen. A chapter_save eseményt én definiáltam:<br>
-<img src="./assets/events.png" width="200">
+<img src="./assets/events.png" width="200"><br>
 Screenshot az összeomlásokról a kontrol panelen:<br>
 <img src="./assets/crash.png" width="200">
 # Felület és üzleti logika
