@@ -14,6 +14,7 @@ import retrofit2.awaitResponse
 import java.io.IOException
 import javax.inject.Inject
 
+// a hibás futásokat mindenhol érdemes nézni
 @ActivityScoped
 class BrowseRepository @Inject constructor(
     private val bibleApiService: BibleApiService
@@ -34,6 +35,8 @@ class BrowseRepository @Inject constructor(
         }
     }
 
+    // itt mivel egy összetett feltétel van, meg lehet nézni, mi történik különböző kombinációknál
+    // mivel itt bonyolultabb a belső rész, fontos a sikeres futást nézni
     suspend fun getBible(bibleId: String): Bible {
         return try {
             val bibleResponse = bibleApiService.getBible(bibleId).awaitResponse()

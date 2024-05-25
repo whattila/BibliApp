@@ -20,10 +20,12 @@ class BibleSelectViewModel @Inject constructor(
 ) : ViewModel() {
     var bibleListUiState: BibleListUiState by mutableStateOf(BibleListUiState.Loading)
         private set
+
     init {
         getBiblesSectioned()
     }
 
+    // van üres BibleSummary objektum és üres Language objektum
     private fun getBiblesSectioned() {
         viewModelScope.launch {
             bibleListUiState = try {
@@ -50,6 +52,6 @@ class BibleSelectViewModel @Inject constructor(
             sectionList.add(SectionData(language = language, bibles = bibles))
         }
         sectionList.sortBy { it.language.name }
-        return sectionList.toList() // Ezt még rendezhetnénk nyelv alapján
+        return sectionList.toList()
     }
 }

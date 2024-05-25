@@ -3,6 +3,7 @@ package com.example.bibliapp.data.network.models
 import com.example.bibliapp.domain.Book
 import com.example.bibliapp.domain.BookSummary
 
+// TODO: unit test
 data class BookDTO(
     val id: String = "",
     val name: String? = "",

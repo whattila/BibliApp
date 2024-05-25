@@ -21,6 +21,7 @@ class ReadChapterViewModel @Inject constructor(
     var chapterUiState: ChapterUiState by mutableStateOf(ChapterUiState.Loading)
         private set
 
+    // 1. nézzük meg mi van, ha 0 (nem 0L!) az id!
     fun fetchChapter(bibleId: String?, chapterId: String?, databaseChapterId: Long) {
         viewModelScope.launch {
             chapterUiState = try {

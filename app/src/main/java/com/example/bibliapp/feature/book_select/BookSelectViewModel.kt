@@ -20,6 +20,7 @@ class BookSelectViewModel @Inject constructor(
     var bibleUiState: BibleUiState by mutableStateOf(BibleUiState.Loading)
         private set
 
+    // happy path + hiba
     fun fetchBible(bibleId: String) {
         viewModelScope.launch {
             bibleUiState = try {

@@ -17,6 +17,7 @@ class ChapterSelectViewModel @Inject constructor(
     var bookUiState: BookUiState by mutableStateOf(BookUiState.Loading)
         private set
 
+    // happy path + hiba (keressünk valami ritkább kivételt!)
     fun fetchBook(bibleId: String, bookId: String) {
         viewModelScope.launch {
             bookUiState = try {
