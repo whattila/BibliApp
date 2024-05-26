@@ -8,6 +8,8 @@ Screenshot az összeomlásokról a kontrol panelen:<br>
 Az alkalmzáson unit teszteket hajtok végre.<br>
 Az alkalmazásban alacsony, közepes és súlyos problémát is okozhat az alkalmazáslogika helytelen implementálása. A unit tesztek célja kiküszöbölni ezeket a problémákat.<br>
 A unit tesztek célja, hogy ellenőrizzék, hogy az alkalmazás platform-független osztályai (ViewModelek, repositoryk, model osztályok) jól működnek a gyakori és a szélsőséges esetekben. Akkor sikeres a unit tesztelés, ha minden teszt sikeresen lefutott. Nem fednek le minden osztály minden metódusát, azokat viszont igen, ahol nem egyértelmű a lefutás forgatókönyve.<br>
+Screenshot a sikeres futásokról:<br>
+<img src="./assets/test_results.png" width="200">
 # Felület és üzleti logika
 A bemutató videó linkje: https://www.youtube.com/watch?v=cSIID6YKK4o
 # Hálózati réteg és adatbázis

@@ -9,7 +9,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-// TODO: unit test
 // milyen olyan teszt lehet, ami nem csak egy metódus?
 @ActivityScoped
 class FavoriteRepository @Inject constructor(
