@@ -1,17 +1,18 @@
 package com.example.bibliapp.data.network
 
-import com.example.bibliapp.data.network.models.Bible
-import com.example.bibliapp.data.network.models.BibleSummary
-import com.example.bibliapp.data.network.models.Book
-import com.example.bibliapp.data.network.models.BookSummary
-import com.example.bibliapp.data.network.models.Chapter
+import com.example.bibliapp.data.network.models.BibleDTO
+import com.example.bibliapp.data.network.models.BookDTO
+import com.example.bibliapp.data.network.models.BookSummaryDTO
+import com.example.bibliapp.data.network.models.ChapterDTO
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path
 
 interface BibleApiService {
-    // esetleg nem lehet ezt a headert kiszervezni valahova?
+    // A header kiszervezéséről:
+    // https://medium.com/@jeremy.leyvraz/kotlin-simplify-your-api-calls-with-elegance-with-retrofit-1be6da7adae4
+    // https://square.github.io/okhttp/features/interceptors/
     @Headers(
         value = [
             "accept: application/json",
@@ -19,7 +20,7 @@ interface BibleApiService {
         ]
     )
     @GET("bibles")
-    fun getBibles(): Call<List<BibleSummary>>
+    fun getAllBibles(): Call<ResponseBody<List<BibleDTO>>>
 
     @Headers(
         value = [
@@ -28,7 +29,7 @@ interface BibleApiService {
         ]
     )
     @GET("bibles/{bibleId}")
-    fun getBible(@Path("bibleId") bibleId: String): Call<Bible>
+    fun getBible(@Path("bibleId") bibleId: String): Call<ResponseBody<BibleDTO>>
 
     @Headers(
         value = [
@@ -37,7 +38,7 @@ interface BibleApiService {
         ]
     )
     @GET("bibles/{bibleId}/books")
-    fun getBooksOfBible(@Path("bibleId") bibleId: String): Call<List<BookSummary>>
+    fun getBooksOfBible(@Path("bibleId") bibleId: String): Call<ResponseBody<List<BookSummaryDTO>>>
 
     @Headers(
         value = [
@@ -46,7 +47,7 @@ interface BibleApiService {
         ]
     )
     @GET("bibles/{bibleId}/books/{bookId}?include-chapters=true")
-    fun getBook(@Path("bibleId") bibleId: String, @Path("bookId") bookId: String): Call<Book>
+    fun getBook(@Path("bibleId") bibleId: String, @Path("bookId") bookId: String): Call<ResponseBody<BookDTO>>
 
     @Headers(
         value = [
@@ -54,7 +55,6 @@ interface BibleApiService {
             "api-key: 93c78c3cdbf7407bf4016ad0d81e4a56"
         ]
     )
-    // TODO: ennek a kérésnek sokféle paramétert lehet adni! Vizsgáljuk meg ezeket, és döntsük el, hogy melyiket mire érdemes állítani!
     @GET("bibles/{bibleId}/chapters/{chapterId}")
-    fun getChapter(@Path("bibleId") bibleId: String, @Path("chapterId") chapterId: String): Call<Chapter>
+    fun getChapter(@Path("bibleId") bibleId: String, @Path("chapterId") chapterId: String): Call<ResponseBody<ChapterDTO>>
 }
